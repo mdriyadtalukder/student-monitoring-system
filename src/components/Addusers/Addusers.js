@@ -1,14 +1,25 @@
 import React, { useRef, useState } from 'react';
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
-import auth, { db } from '../../firebase.init';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+// import auth, { db } from '../../firebase.init';
+// import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import { signOut } from 'firebase/auth';
 
 const Addusers = () => {
     const emailInput = useRef('');
     const nameInput = useRef('');
     const passwordInput = useRef('');
     const [reload, setReload] = useState(false);
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [updateProfile, updating, error1] = useUpdateProfile(auth);
 
     const addUsers = async (event) => {
         event.preventDefault();
@@ -16,17 +27,28 @@ const Addusers = () => {
         const name = nameInput.current.value;
         const password = passwordInput.current.value;
         if (name && email && password) {
-            const res = await createUserWithEmailAndPassword(
-                auth,
-                email, password
-            )
-            await setDoc(doc(db, "users", res.user.uid), {
+            // const res = await createUserWithEmailAndPassword(
+            //     auth,
+            //     email, password
+            // )
+            // await setDoc(doc(db, "users", res.user.uid), {
+            //     name: name,
+            //     email: email,
+            //     password: password,
+            //     state: "Dhaka",
+            //     country: "Bangladesh"
+            // });
+            await createUserWithEmailAndPassword(email, password);
+            await updateProfile({ displayName: name });
+            signOut(auth)
+            const users = {
                 name: name,
-                email: email,
-                password: password,
-                state: "Dhaka",
-                country: "Bangladesh"
-            });
+                email: email
+            }
+            axios.post('http://localhost:5000/users', users)
+                .then(res => {
+                    console.log(res)
+                })
             toast('User successfully added!!!');
             event.target.reset();
             setReload(!reload);
@@ -34,7 +56,6 @@ const Addusers = () => {
         else {
             toast('Please enter the all input field')
         }
-
     }
 
     return (

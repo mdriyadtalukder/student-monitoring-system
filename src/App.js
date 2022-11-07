@@ -5,6 +5,8 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
+import Edit from './components/MyProfile/Edit';
+import Myprofile from './components/MyProfile/Myprofile';
 import RequireAuth from './components/RequireAuth/RequireAuth';
 import Signup from './components/Signup/Signup';
 import Students from './components/Students/Students';
@@ -20,12 +22,14 @@ function App() {
         </RequireAuth>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<Signup></Signup>}></Route>
+        <Route path='/edit' element={<Edit></Edit>}></Route>
         <Route path='/dashboard' element={<RequireAuth>
           <Dashboard></Dashboard>
         </RequireAuth>}>
           <Route index element={<User></User>}></Route>
           <Route path='students' element={<Students></Students>}></Route>
-          <Route path='addusers' element={<Addusers></Addusers>}></Route>
+          {/* <Route path='addusers' element={<Addusers></Addusers>}></Route> */}
+          <Route path='myprofile' element={<Myprofile></Myprofile>}></Route>
         </Route>
       </Routes>
     </div>
