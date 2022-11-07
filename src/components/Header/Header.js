@@ -17,7 +17,7 @@ const Header = () => {
                 <Link to='/' class="btn btn-ghost normal-case text-xl">daisyUI</Link>
             </div>
             <div class="navbar-end">
-                <Link to='/' class="btn">Dashboard</Link>
+                <Link to='/dashboard' class="btn">Dashboard</Link>
                 {
                     user ? <Link onClick={signout} class="btn">Sign Out</Link> : <Link to='/login' class="btn">Log In</Link>
 
