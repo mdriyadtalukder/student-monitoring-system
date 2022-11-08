@@ -8,7 +8,7 @@ const Myprofile = () => {
     const [users, setUsers] = useState([]);
     const [loading, setloading] = useState(true);
     useEffect(() => {
-        fetch(`http://localhost:5000/info?email=${user?.email}`)
+        fetch(`http://localhost:5000/info/${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setUsers(data);
@@ -16,6 +16,7 @@ const Myprofile = () => {
             })
 
     }, [users])
+    console.log(users)
 
     return (
         <div class="bg-white p-3 shadow-sm rounded-sm w-full h-full" id='bgc'>
@@ -37,44 +38,44 @@ const Myprofile = () => {
                     </div>
                     <div class="grid grid-cols-2">
                         <div class="px-4 py-2 font-semibold">Father's Name</div>
-                        <div class="px-4 py-2">{users[0]?.fName ? users[0]?.fName : 'Please Set Your Fathers Name'}</div>
+                        <div class="px-4 py-2">{users?.fName ? users?.fName : 'Please Set Your Fathers Name'}</div>
                     </div>
                     <div class="grid grid-cols-2">
                         <div class="px-4 py-2 font-semibold">Mother's Name</div>
-                        <div class="px-4 py-2"> <div class="px-4 py-2">{users[0]?.mName ? users[0]?.mName : 'Please Set Your Mothers Name'}</div>
+                        <div class="px-4 py-2"> <div class="px-4 py-2">{users?.mName ? users?.mName : 'Please Set Your Mothers Name'}</div>
                         </div>
                     </div>
                     <div class="grid grid-cols-2">
                         <div class="px-4 py-2 font-semibold">Gender</div>
-                        <div class="px-4 py-2">{users[0]?.geender ? users[0]?.geender : 'Please Set Your Gender'}</div>
+                        <div class="px-4 py-2">{users?.geender ? users?.geender : 'Please Set Your Gender'}</div>
                     </div>
                     <div class="grid grid-cols-2">
                         <div class="px-4 py-2 font-semibold">Contact No.</div>
-                        <div class="px-4 py-2">{users[0]?.contactN ? users[0]?.contactN : 'Please Set Your Gender'}</div>
+                        <div class="px-4 py-2">{users?.contactN ? users?.contactN : 'Please Set Your Gender'}</div>
                     </div>
                     <div class="grid grid-cols-2">
                         <div class="px-4 py-2 font-semibold">Current Address</div>
-                        <div class="px-4 py-2">{users[0]?.cAddress ? users[0]?.cAddress : 'Please Set Your Gender'}</div>
+                        <div class="px-4 py-2">{users?.cAddress ? users?.cAddress : 'Please Set Your Gender'}</div>
                     </div>
                     <div class="grid grid-cols-2">
                         <div class="px-4 py-2 font-semibold">Permanant Address</div>
-                        <div class="px-4 py-2">{users[0]?.pAddress ? users[0]?.pAddress : 'Please Set Your Gender'}</div>
+                        <div class="px-4 py-2">{users?.pAddress ? users?.pAddress : 'Please Set Your Gender'}</div>
                     </div>
                     <div class="grid grid-cols-2">
                         <div class="px-4 py-2 font-semibold">Email.</div>
                         <div class="px-4 py-2">
-                            <a class="text-blue-800" href="mailto:jane@example.com">{user.email ? user.email : 'Please Set Your Gender'}</a>
+                            <a class="text-blue-800" href="mailto:jane@example.com">{user.email ? user?.email : 'Please Set Your Gender'}</a>
                         </div>
                     </div>
                     <div class="grid grid-cols-2">
                         <div class="px-4 py-2 font-semibold">Birthday</div>
-                        <div class="px-4 py-2">{users[0]?.bDay ? users[0]?.bDay : 'Please Set Your Gender'}</div>
+                        <div class="px-4 py-2">{users?.bDay ? users?.bDay : 'Please Set Your Gender'}</div>
                     </div>
                 </div>
             </div>
             <div className="text-center">
                 <Link to='/edit' className='btn btn-info mt-12'>Set Your Profile</Link>
-                <Link to='/edit' className='btn btn-info mt-12 ml-6'>Edit Profile</Link>
+                <Link to='/edit2' className='btn btn-info mt-12 ml-6'>Edit Profile</Link>
             </div>
         </div>
     );

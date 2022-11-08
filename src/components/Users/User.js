@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const User = () => {
     const [datas, setData] = useState([])
-    let count=1;
+    const navigation = useNavigate();
+    let count = 1;
     useEffect(() => {
         fetch('http://localhost:5000/users')
             .then(res => res.json())
             .then(data => setData(data))
     })
+
 
     return (
         <div class="w-full h-full">
@@ -17,6 +20,8 @@ const User = () => {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Add Courses</th>
+                        <th>View Courses</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +31,14 @@ const User = () => {
                             <td>{d?.name}</td>
                             <td>{d?.email}</td>
                             <td>{d?.role}</td>
+                            <td><button onClick={() => {
+                                const path = `/dashboard/${d?.email}`
+                                navigation(path)
+                            }}>Add</button></td>
+                            <td><button onClick={() => {
+                                const path = `/dashboards/${d?.email}`
+                                navigation(path)
+                            }}>View</button></td>
                         </tr>)
                     }
                 </tbody>
