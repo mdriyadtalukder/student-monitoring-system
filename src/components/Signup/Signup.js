@@ -42,7 +42,7 @@ const Signup = () => {
             email: email,
             role:role
         }
-        axios.post('http://localhost:5000/users', users)
+        axios.post('https://student-monitoring-system-server.onrender.com/users', users)
             .then(res => {
                 console.log(res)
             })

@@ -5,7 +5,7 @@ const User = () => {
     const navigation = useNavigate();
     let count = 1;
     useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch('https://student-monitoring-system-server.onrender.com/users')
             .then(res => res.json())
             .then(data => setData(data))
     })

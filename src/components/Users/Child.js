@@ -14,7 +14,7 @@ const Child = () => {
     const [da, setDa] = useState([])
     const [reload, setReload] = useState(false);
     useEffect(() => {
-        fetch(`http://localhost:5000/user?email=${param.userID}`)
+        fetch(`https://student-monitoring-system-server.onrender.com/user?email=${param.userID}`)
             .then(res => res.json())
             .then(data => setDa(data))
     }, [da])

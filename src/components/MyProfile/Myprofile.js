@@ -8,7 +8,7 @@ const Myprofile = () => {
     const [users, setUsers] = useState([]);
     const [loading, setloading] = useState(true);
     useEffect(() => {
-        fetch(`http://localhost:5000/info/${user?.email}`)
+        fetch(`https://student-monitoring-system-server.onrender.com/info/${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setUsers(data);

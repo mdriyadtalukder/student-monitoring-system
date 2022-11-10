@@ -9,7 +9,7 @@ const Views = () => {
     const navigation = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/cms?email=${param.viewID}`)
+        fetch(`https://student-monitoring-system-server.onrender.com/cms?email=${param.viewID}`)
             .then(res => res.json())
             .then(data => setDa(data))
     }, [da])

@@ -19,7 +19,7 @@ const Edit2 = () => {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/info/${user?.email}`)
+        fetch(`https://student-monitoring-system-server.onrender.com/info/${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -56,7 +56,7 @@ const Edit2 = () => {
                 email: email,
                 bDay: birthday
             }
-            fetch(`http://localhost:5000/info/${user?.email}`, {
+            fetch(`https://student-monitoring-system-server.onrender.com/info/${user?.email}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

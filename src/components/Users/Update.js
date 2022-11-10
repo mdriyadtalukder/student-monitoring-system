@@ -16,7 +16,7 @@ const Update = () => {
     const tm = useRef('');
     const cd = useRef('')
     useEffect(() => {
-        fetch(`http://localhost:5000/cms/${param.editID}`)
+        fetch(`https://student-monitoring-system-server.onrender.com/cms/${param.editID}`)
             .then(res => res.json())
             .then(data => setDa(data))
     }, [da])
@@ -41,7 +41,7 @@ const Update = () => {
                 totals: total,
 
             }
-            fetch(`http://localhost:5000/cms/${param.editID}`, {
+            fetch(`https://student-monitoring-system-server.onrender.com/cms/${param.editID}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
