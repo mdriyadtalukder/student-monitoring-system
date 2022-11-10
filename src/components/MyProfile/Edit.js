@@ -39,9 +39,18 @@ const Edit = () => {
                 email: email,
                 bDay: birthday
             }
-            axios.post('http://localhost:5000/info', infos)
-                .then(res => {
-                    toast('Information successfully added!!!');
+            fetch(`http://localhost:5000/info/${user?.email}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(infos),
+            }, [reload])
+                .then(response => response.json())
+
+
+                .then(data => {
+                    toast('successfully updated!!!');
                     event.target.reset();
                     setReload(!reload);
                 })
@@ -63,7 +72,7 @@ const Edit = () => {
                         <div class="grid grid-cols-6 gap-6">
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="first-name" class="block text-sm font-medium text-gray-700">Enter Name</label>
-                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="text" placeholder={user?.displayName} readOnly/>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="text" placeholder={user?.displayName} readOnly />
 
                             </div>
 

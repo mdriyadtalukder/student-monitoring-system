@@ -5,6 +5,9 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const Edit2 = () => {
     const [user] = useAuthState(auth);
+    const [users, setUsers] = useState([]);
+    const [reload, setReload] = useState(false);
+    const [loading1, setloading1] = useState(true);
     const fname = useRef('');
     const mname = useRef('');
     const gen = useRef('');
@@ -12,19 +15,22 @@ const Edit2 = () => {
     const caddress = useRef('');
     const paddress = useRef('');
     const bday = useRef('');
-    const [reload, setReload] = useState(false);
-    const [users, setUsers] = useState([]);
-    const [loading, setloading] = useState(true);
+
 
     useEffect(() => {
+
         fetch(`http://localhost:5000/info/${user?.email}`)
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 setUsers(data);
-                setloading(false);
+                setloading1(false);
+
             })
 
-    }, [users])
+
+    }, [user])
+
 
     const edits = event => {
         event.preventDefault();
@@ -71,6 +77,7 @@ const Edit2 = () => {
 
         }
     }
+
     return (
 
 

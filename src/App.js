@@ -25,8 +25,8 @@ function App() {
         </RequireAuth>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<Signup></Signup>}></Route>
-        <Route path='/edit' element={<Edit></Edit>}></Route>
-        <Route path='/edit2' element={<Edit2></Edit2>}></Route>
+        <Route path='/dashboard/myprofile/edit' element={<Edit></Edit>}></Route>
+        <Route path='/dashboard/myprofile/edit2' element={<Edit2></Edit2>}></Route>
         <Route path='/dashboard/:userID' element={<Child></Child>}></Route>
         <Route path='/dashboards/:viewID' element={<Views></Views>}></Route>
         <Route path='/dashboardss/:editID' element={<Update></Update>}></Route>

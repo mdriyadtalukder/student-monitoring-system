@@ -74,8 +74,8 @@ const Myprofile = () => {
                 </div>
             </div>
             <div className="text-center">
-                <Link to='/edit' className='btn btn-info mt-12'>Set Your Profile</Link>
-                <Link to='/edit2' className='btn btn-info mt-12 ml-6'>Edit Profile</Link>
+                <Link to='/dashboard/myprofile/edit' className='btn btn-info mt-12'>Set Your Profile</Link>
+                <Link to='/dashboard/myprofile/edit2' className='btn btn-info mt-12 ml-6'>Edit Profile</Link>
             </div>
         </div>
     );
