@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
-const Views = () => {
-    const param = useParams();
+const Mycourses = () => {
+    const [user] = useAuthState(auth);
     const [da, setDa] = useState([])
-    let count=1;
+    let count = 1;
     const [reload, setReload] = useState(false);
-    const navigation = useNavigate();
 
     useEffect(() => {
-        fetch(`https://student-monitoring-system-server.onrender.com/cms?email=${param.viewID}`)
+        fetch(`https://student-monitoring-system-server.onrender.com/cms?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setDa(data))
     }, [da])
-
     return (
         <div class="w-full h-full">
             <table class="table w-full">
@@ -21,13 +20,12 @@ const Views = () => {
                     <tr>
                         <th></th>
                         <th>Semseter</th>
-                        <th>ID</th>
                         <th>Course Code</th>
                         <th>Course Name</th>
                         <th>Practicle Marks</th>
                         <th>Theory Marks</th>
                         <th>Total Marks</th>
-                        <th>Edit Marks</th>
+                        <th>Course Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,16 +33,16 @@ const Views = () => {
                         da?.map(d => <tr>
                             <td>{count++}</td>
                             <td>{d?.semesters ? d?.semesters : 'Not Assign Yet'}</td>
-                            <td>{d?._id ? d?._id : 'Not Assign Yet'}</td>
                             <td>{d?.code ? d?.code : 'Not Assign Yet'}</td>
                             <td>{d?.sub ? d?.sub : 'Not Assign Yet'}</td>
                             <td>{d?.prac ? d?.prac : 'Not Assign Yet'}</td>
-                            <td>{d?.theory ? d?.theory :'Not Assign Yet'}</td>
+                            <td>{d?.theory ? d?.theory : 'Not Assign Yet'}</td>
                             <td>{d?.totals ? d?.totals : 'Not Assign Yet'}</td>
-                            <td><button className='btn btn-info' onClick={() => {
-                                const path = `/dashboardss/${d?._id}`
-                                navigation(path)
-                            }}>Edit</button></td>
+                            <td>
+                                {
+                                    (d?.prac && d?.theory && d?.totals) ? <p className='text-green-500	font-bold'>Complete Courses</p> : <p className='text-rose-500 font-bold'>Incomplete Course</p>
+                                }
+                            </td>
                         </tr>)
                     }
                 </tbody>
@@ -53,4 +51,4 @@ const Views = () => {
     );
 };
 
-export default Views;
+export default Mycourses;

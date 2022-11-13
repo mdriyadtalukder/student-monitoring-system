@@ -19,7 +19,7 @@ const Myprofile = () => {
     console.log(users)
 
     return (
-        <div class="bg-white p-3 shadow-sm rounded-sm w-full h-full" id='bgc'>
+        <div class=" bg-gradient-to-r from-sky-200 via-cyab-200 to-blue-200 p-3 shadow-sm rounded-sm w-full h-full" id='bgc'>
             <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                 <span clas="text-green-500">
                     <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -74,8 +74,11 @@ const Myprofile = () => {
                 </div>
             </div>
             <div className="text-center">
-                <Link to='/dashboard/myprofile/edit' className='btn btn-info mt-12'>Set Your Profile</Link>
-                <Link to='/dashboard/myprofile/edit2' className='btn btn-info mt-12 ml-6'>Edit Profile</Link>
+                {
+                    users.length == 0 ? <Link to='/dashboard/myprofile/edit' className='btn btn-info mt-12'>Set Your Profile</Link> :
+                        <Link to='/dashboard/myprofile/edit2' className='btn btn-info mt-12 ml-6'>Edit Profile</Link>
+
+                }
             </div>
         </div>
     );

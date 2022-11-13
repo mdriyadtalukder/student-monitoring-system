@@ -37,7 +37,7 @@ const Child = () => {
                 totals: total
 
             }
-            axios.post('http://localhost:5000/cms', coum)
+            axios.post('https://student-monitoring-system-server.onrender.com/cms', coum)
                 .then(res => {
                     toast('Information successfully added!!!');
                     event.target.reset();

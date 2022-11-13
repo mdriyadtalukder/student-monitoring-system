@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
+import Mycourses from './components/Mycourses/Mycourses';
 import Edit from './components/MyProfile/Edit';
 import Edit2 from './components/MyProfile/Edit2';
 import Myprofile from './components/MyProfile/Myprofile';
@@ -36,6 +37,7 @@ function App() {
           <Route index element={<User></User>}></Route>
           {/* <Route path='addusers' element={<Addusers></Addusers>}></Route> */}
           <Route path='myprofile' element={<Myprofile></Myprofile>}></Route>
+          <Route path='mycourse' element={<Mycourses></Mycourses>}></Route>
         </Route>
       </Routes>
     </div>

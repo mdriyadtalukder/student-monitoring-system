@@ -64,9 +64,9 @@ const Edit = () => {
     return (
 
 
-        <div className='flex h-screen justify-center items-center'>
+        <div className='flex h-screen justify-center items-center '>
 
-            <form onSubmit={edits} className='class="bg-white shadow-lg rounded w-9/12	'>
+            <form onSubmit={edits} className='bg-white shadow-lg rounded w-9/12	'>
                 <div class="overflow-hidden shadow sm:rounded-md">
                     <div class="bg-white px-4 py-5 sm:p-6">
                         <div class="grid grid-cols-6 gap-6">

@@ -72,7 +72,9 @@ const Login = () => {
                 <div className="text-center pt-2">
                     <button onClick={forgetPassword} className='btn-white text-info font-bold'>Forget password?</button>
                 </div>
+                <div className='btn btn-info mt-3.5 w-full'>
                 <Link to='/signup'>Sing Up</Link>
+                </div>
             </div>
             <ToastContainer ></ToastContainer>
         </div>

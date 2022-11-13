@@ -9,7 +9,7 @@ const User = () => {
             .then(res => res.json())
             .then(data => setData(data))
     })
-
+    console.log(datas)
 
     return (
         <div class="w-full h-full">
@@ -31,14 +31,18 @@ const User = () => {
                             <td>{d?.name}</td>
                             <td>{d?.email}</td>
                             <td>{d?.role}</td>
-                            <td><button onClick={() => {
-                                const path = `/dashboard/${d?.email}`
-                                navigation(path)
-                            }}>Add</button></td>
-                            <td><button onClick={() => {
-                                const path = `/dashboards/${d?.email}`
-                                navigation(path)
-                            }}>View</button></td>
+                            <td>{
+                                d?.role == 'Student' && <button className='btn btn-info' onClick={() => {
+                                    const path = `/dashboard/${d?.email}`
+                                    navigation(path)
+                                }}>Add</button>
+                            }</td>
+                            <td>{
+                                d?.role == 'Student' && <button  className='btn btn-info' onClick={() => {
+                                    const path = `/dashboards/${d?.email}`
+                                    navigation(path)
+                                }}>View</button>
+                            }</td>
                         </tr>)
                     }
                 </tbody>
