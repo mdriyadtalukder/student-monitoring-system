@@ -1,14 +1,17 @@
+import { async } from '@firebase/util';
 import axios from 'axios';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import img from '../../img/signin.png'
 
 const Signup = () => {
     const emailInput = useRef('');
     const nameInput = useRef('');
     const passwordInput = useRef('');
     const navigate = useNavigate();
+    // const [da, setDa] = useState([])
     const [
         createUserWithEmailAndPassword,
         user,
@@ -17,40 +20,63 @@ const Signup = () => {
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating, error1] = useUpdateProfile(auth);
     let errors;
+    // useEffect(() => {
+    //     fetch('review.json')
+    //         .then(res => res.json())
+    //         .then(data => setDa(data))
+    // }, [])
     if (error || error1) {
         errors = <p className='text-danger block text-sm text-error font-bold text-center'>Find some errors! try again</p>
     }
     if (loading || updating) {
-        return <div class="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
-            <div class="border-t-transparent border-solid animate-spin  rounded-full border-info border-4 h-16 w-16"></div>
+        return <div className='flex h-screen justify-center items-center bg-gradient-to-r from-cyan-200 to-blue-200'>
+            <div class="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
+                <div class="border-t-transparent border-solid animate-spin  rounded-full border-info border-4 h-16 w-16"></div>
+            </div>
         </div>
 
     }
     if (user) {
         navigate('/');
     }
+
+
+    // let myFunction = async () => {
+    //     for (var j = 0; j <= da?.length; j++) {
+    //         if (da[j]?.email && da[j]?.name) {
+    //             await createUserWithEmailAndPassword(da[j]?.email, "123456");
+    //             await updateProfile({ displayName: da[j]?.name });
+    //         }
+    //         else {
+    //             console.log('not')
+    //         }
+    //     }
+    // }
+    // myFunction()
+
     const signup = async (event) => {
         event.preventDefault();
         const email = emailInput.current.value;
         const name = nameInput.current.value;
         const password = passwordInput.current.value;
-        const role=event.target.option.value;
+        const role = event.target.option.value;
         await createUserWithEmailAndPassword(email, password);
         await updateProfile({ displayName: name });
         const users = {
             name: name,
             email: email,
-            role:role
+            role: role
         }
         axios.post('https://student-monitoring-system-server.onrender.com/users', users)
             .then(res => {
                 console.log(res)
             })
-            console.log(role)
+        console.log(role)
 
     }
+
     return (
-        <div className='flex h-screen justify-center items-center'>
+        <div className='flex h-screen justify-center items-center bg-gradient-to-r from-cyan-200 to-blue-200'>
             <div class="bg-white shadow-lg rounded px-20 pt-16 pb-20 mb-12">
                 <form onSubmit={signup}>
                     <div class="mb-4">
@@ -85,8 +111,11 @@ const Signup = () => {
                         </div>
                     </div>
                     {errors}
-                    <button class="w-full btn btn-info mt-3.5 mb-3.5">Sign Up</button>
+                    <button id='idd' class="w-full btn bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-cyan-400 hover:to-blue-500 mt-3.5 mb-3.5">Sign Up</button>
                 </form>
+            </div>
+            <div>
+                <img src={img} alt="" />
             </div>
         </div>
     );

@@ -2,9 +2,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { ToastContainer, toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
-const Edit2 = () => {
-    const [user] = useAuthState(auth);
+const Editn = () => {
+    const param = useParams();
     const [users, setUsers] = useState([]);
     const [reload, setReload] = useState(false);
     const [loading1, setloading1] = useState(true);
@@ -19,7 +20,7 @@ const Edit2 = () => {
 
     useEffect(() => {
 
-        fetch(`https://student-monitoring-system-server.onrender.com/info/${user?.email}`)
+        fetch(`https://student-monitoring-system-server.onrender.com/info/${param.enID}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -29,24 +30,21 @@ const Edit2 = () => {
             })
 
 
-    }, [user])
-
+    }, [users])
 
     const edits = event => {
         event.preventDefault();
-        const name = user.displayName;
         const father = fname.current.value;
         const mother = mname.current.value;
         const gender = gen.current.value;
         const contact = con.current.value;
         const currentAddress = caddress.current.value;
         const permanantAddress = paddress.current.value;
-        const email = user.email;
+        const email = users?.email;
         const birthday = bday.current.value;
 
         if (father || mother || gender || contact || currentAddress || permanantAddress || birthday) {
             const infos = {
-                name: name,
                 fName: father,
                 mName: mother,
                 geender: gender,
@@ -56,7 +54,7 @@ const Edit2 = () => {
                 email: email,
                 bDay: birthday
             }
-            fetch(`https://student-monitoring-system-server.onrender.com/info/${user?.email}`, {
+            fetch(`https://student-monitoring-system-server.onrender.com/info/${param.enID}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,11 +75,10 @@ const Edit2 = () => {
 
         }
     }
-
     return (
 
 
-        <div className='flex h-screen justify-center items-center  bg-gradient-to-r from-cyan-200 to-blue-200'>
+        <div className='flex h-screen justify-center items-center bg-gradient-to-r from-sky-200 via-cyab-200 to-blue-200'>
 
             <form onSubmit={edits} className='bg-white shadow-lg rounded w-9/12	'>
                 <div class="overflow-hidden shadow sm:rounded-md">
@@ -89,7 +86,7 @@ const Edit2 = () => {
                         <div class="grid grid-cols-6 gap-6">
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="first-name" class="block text-sm font-medium text-gray-700">Enter Name</label>
-                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="text" placeholder={user?.displayName} readOnly />
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="text" defaultValue={users?.name} readOnly />
 
                             </div>
 
@@ -130,7 +127,7 @@ const Edit2 = () => {
 
                             <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                                 <label for="region" class="block text-sm font-medium text-gray-700">Enter Email</label>
-                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="text" placeholder={user?.email} readOnly />
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="text" placeholder={users?.email} readOnly />
 
                             </div>
 
@@ -153,4 +150,4 @@ const Edit2 = () => {
     );
 };
 
-export default Edit2;
+export default Editn;

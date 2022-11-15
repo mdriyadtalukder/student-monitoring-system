@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import img from '../../img/login.png'
 const Login = () => {
     const emailInput = useRef('');
     const passwordInput = useRef('');
@@ -23,8 +24,10 @@ const Login = () => {
         errors = <p className='text-danger block text-sm text-error font-bold text-center'>Incorrect email or password</p>
     }
     if (loading || sending) {
-        return <div class="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
-            <div class="border-t-transparent border-solid animate-spin  rounded-full border-info border-4 h-16 w-16"></div>
+        return <div className='flex h-screen justify-center items-center bg-gradient-to-r from-cyan-200 to-blue-200'>
+            <div class="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
+                <div class="border-t-transparent border-solid animate-spin  rounded-full border-info border-4 h-16 w-16"></div>
+            </div>
         </div>
     }
     if (user) {
@@ -51,7 +54,10 @@ const Login = () => {
     }
     return (
 
-        <div className='flex h-screen justify-center items-center'>
+        <div className='flex h-screen justify-center items-center bg-gradient-to-r from-cyan-200 to-blue-200'>
+            <div className='w-3/6'>
+                <img src={img} alt="" />
+            </div>
             <div class="bg-white shadow-lg rounded px-20 pt-16 pb-20 mb-12">
                 <form onSubmit={login}>
                     <div class="mb-4">
@@ -67,13 +73,13 @@ const Login = () => {
                         <input ref={passwordInput} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="text" placeholder="Enter Password" />
                     </div>
                     {errors}
-                    <button class="w-full btn btn-info mt-3.5 mb-3.5">Log In</button>
+                    <button id='idd' class="w-full btn bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-cyan-400 hover:to-blue-500 mt-3.5 mb-3.5">Log In</button>
                 </form>
                 <div className="text-center pt-2">
                     <button onClick={forgetPassword} className='btn-white text-info font-bold'>Forget password?</button>
                 </div>
-                <div className='btn btn-info mt-3.5 w-full'>
-                <Link to='/signup'>Sing Up</Link>
+                <div id='idd' className='btn bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-cyan-400 hover:to-blue-500 mt-3.5 w-full'>
+                    <Link to='/signup'>Sing Up</Link>
                 </div>
             </div>
             <ToastContainer ></ToastContainer>

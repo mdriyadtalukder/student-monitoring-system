@@ -22,6 +22,7 @@ const User = () => {
                         <th>Role</th>
                         <th>Add Courses</th>
                         <th>View Courses</th>
+                        <th>Profile</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,12 @@ const User = () => {
                                     const path = `/dashboards/${d?.email}`
                                     navigation(path)
                                 }}>View</button>
+                            }</td>
+                            <td>{
+                                d?.role == 'Student' && <button  className='btn btn-info' onClick={() => {
+                                    const path = `/dashboardp/${d?.email}`
+                                    navigation(path)
+                                }}>My Profile</button>
                             }</td>
                         </tr>)
                     }

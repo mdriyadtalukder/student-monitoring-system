@@ -50,8 +50,8 @@ const Child = () => {
         }
     }
     return (
-        <div className='flex h-screen justify-center items-center'>
-            <form onSubmit={add} className='class="bg-white shadow-lg rounded w-9/12	'>
+        <div className='flex h-screen justify-center items-center  bg-gradient-to-r from-cyan-200 to-blue-200'>
+            <form onSubmit={add} className='bg-white shadow-lg rounded w-9/12	'>
                 <div class="overflow-hidden shadow sm:rounded-md">
                     <div class="bg-white px-4 py-5 sm:p-6">
                         <div class="grid grid-cols-6 gap-6">

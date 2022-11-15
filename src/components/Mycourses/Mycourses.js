@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate, useParams } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const Mycourses = () => {
     const [user] = useAuthState(auth);
     const [da, setDa] = useState([])
+    const navigation = useNavigate();
     let count = 1;
     const [reload, setReload] = useState(false);
 
@@ -26,6 +28,8 @@ const Mycourses = () => {
                         <th>Theory Marks</th>
                         <th>Total Marks</th>
                         <th>Course Status</th>
+                        <th>Attendance</th>
+                        <th>FeedBack</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +46,18 @@ const Mycourses = () => {
                                 {
                                     (d?.prac && d?.theory && d?.totals) ? <p className='text-green-500	font-bold'>Complete Courses</p> : <p className='text-rose-500 font-bold'>Incomplete Course</p>
                                 }
+                            </td>
+                            <td>
+                                <button className='btn btn-info' onClick={() => {
+                                    const path = `/dashboard/attend/${d?._id}`
+                                    navigation(path)
+                                }}>Attendance</button>
+                            </td>
+                            <td>
+                                <button className='btn btn-info' onClick={() => {
+                                    const path = `/dashboard/feedb/${d?._id}`
+                                    navigation(path)
+                                }}>Feedback</button>
                             </td>
                         </tr>)
                     }

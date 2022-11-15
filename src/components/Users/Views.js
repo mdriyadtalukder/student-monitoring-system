@@ -15,7 +15,7 @@ const Views = () => {
     }, [da])
 
     return (
-        <div class="w-full h-full">
+        <div class="w-full h-full  bg-gradient-to-r from-cyan-200 to-blue-200">
             <table class="table w-full">
                 <thead>
                     <tr>

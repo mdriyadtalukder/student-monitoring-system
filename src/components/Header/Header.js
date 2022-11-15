@@ -13,7 +13,7 @@ const Header = () => {
         // navigate('/login');
     }
     return (
-        <div class="navbar bg-info ">
+        <div class="navbar bg-gradient-to-r from-cyan-500 to-blue-500 ">
             <div class="navbar-start">
                 <Link to='/' class="btn btn-ghost normal-case text-xl"><label tabindex="0" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
@@ -22,9 +22,9 @@ const Header = () => {
                 </label></Link>
             </div>
             <div class="navbar-end">
-                <Link to='/dashboard' class="btn btn-primary">Dashboard</Link>
+                <Link id='idd' to='/dashboard' class="btn bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-cyan-400 hover:to-blue-500">Dashboard</Link>
                 {
-                    user ? <Link onClick={signout} class="btn btn-primary ml-2">Sign Out</Link> : <Link to='/login' class="ml-2 btn btn-primary">Log In</Link>
+                    user ? <Link onClick={signout} id='idd' class="btn bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-cyan-400 hover:to-blue-500 ml-2">Sign Out</Link> : <Link to='/login' id='idd' class="ml-2 btn bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-cyan-400 hover:to-blue-500">Log In</Link>
 
                 }
             </div>
@@ -33,3 +33,4 @@ const Header = () => {
 };
 
 export default Header;
+
