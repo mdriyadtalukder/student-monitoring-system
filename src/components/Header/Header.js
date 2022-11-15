@@ -24,9 +24,13 @@ const Header = () => {
             <div class="navbar-end">
                 <Link id='idd' to='/dashboard' class="btn bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-cyan-400 hover:to-blue-500">Dashboard</Link>
                 {
+                    user && <p className='text-white font-bold ml-2'>{user?.displayName}</p>
+                }
+                {
                     user ? <Link onClick={signout} id='idd' class="btn bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-cyan-400 hover:to-blue-500 ml-2">Sign Out</Link> : <Link to='/login' id='idd' class="ml-2 btn bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-cyan-400 hover:to-blue-500">Log In</Link>
 
                 }
+
             </div>
         </div>
     );
