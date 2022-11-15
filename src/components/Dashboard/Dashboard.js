@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
+import auth from '../../firebase.init';
+import useAdmin from '../useAdmin/useAdmin';
 
 const Dashboard = () => {
+    const [user] = useAuthState(auth);
+    const [admin] = useAdmin(user);
+    const [datas, setData] = useState([])
+    const [loading, setloading] = useState(true);
+    console.log(admin)
     return (
         <div class="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
@@ -14,11 +22,19 @@ const Dashboard = () => {
             <div class="drawer-side">
                 <label for="my-drawer-2" class="drawer-overlay"></label>
                 <ul class="menu p-4 w-80 bg-gradient-to-r from-cyan-300 to-blue-400 text-base-content">
-                    <li><Link to='/dashboard'>Users</Link></li>
-                    <li><Link to='/dashboard/myprofile'>My Profile</Link></li>
-                    <li><Link to='/dashboard/mycourse'>My Courses</Link></li>
-                    <li><Link to='/dashboard/attc'> Students Attendence</Link></li>
-                    <li><Link to='/dashboard/feedbk'>Students Feedback</Link></li>
+                    {
+                        admin ? <li><Link to='/dashboard'>Users</Link></li> : <li><Link to='/dashboard'>My Profile</Link></li>
+                    }
+
+                    {
+                        !admin && <li><Link to='/dashboard/mycourse'>My Courses</Link></li>
+                    }
+                    {
+                        admin && <li><Link to='/dashboard/attc'> Students Attendence</Link></li>
+                    }
+                    {
+                        admin && <li><Link to='/dashboard/feedbk'>Students Feedback</Link></li>
+                    }
                 </ul>
 
             </div>

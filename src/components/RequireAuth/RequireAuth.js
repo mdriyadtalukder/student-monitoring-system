@@ -7,8 +7,10 @@ const RequireAuth = ({ children }) => {
     const [user, loading] = useAuthState(auth);
     let location = useLocation();
     if (loading) {
-        return <div class="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
-            <div class="border-t-transparent border-solid animate-spin  rounded-full border-info border-4 h-16 w-16"></div>
+        return <div className='flex h-screen justify-center items-center bg-gradient-to-r from-cyan-200 to-blue-200'>
+            <div class="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
+                <div class="border-t-transparent border-solid animate-spin  rounded-full border-info border-4 h-16 w-16"></div>
+            </div>
         </div>
     }
     if (!user) {

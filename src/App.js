@@ -1,3 +1,4 @@
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Addusers from './components/Addusers/Addusers';
@@ -15,14 +16,18 @@ import Edit2 from './components/MyProfile/Edit2';
 import Myprofile from './components/MyProfile/Myprofile';
 import RequireAuth from './components/RequireAuth/RequireAuth';
 import Signup from './components/Signup/Signup';
+import useAdmin from './components/useAdmin/useAdmin';
 import Child from './components/Users/Child';
 import Editn from './components/Users/Editn';
 import Myprofilee from './components/Users/Myprofilee';
 import Update from './components/Users/Update';
 import User from './components/Users/User';
 import Views from './components/Users/Views';
+import auth from './firebase.init';
 
 function App() {
+  const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
   return (
     <div>
       <Header></Header>
@@ -44,9 +49,12 @@ function App() {
         <Route path='/dashboard' element={<RequireAuth>
           <Dashboard></Dashboard>
         </RequireAuth>}>
+          {
+            admin ?   <Route index element={<User></User>}></Route> :  <Route index element={<Myprofile></Myprofile>}></Route>
+          }
           <Route index element={<User></User>}></Route>
           {/* <Route path='addusers' element={<Addusers></Addusers>}></Route> */}
-          <Route path='myprofile' element={<Myprofile></Myprofile>}></Route>
+          {/* <Route path='myprofile' element={<Myprofile></Myprofile>}></Route> */}
           <Route path='mycourse' element={<Mycourses></Mycourses>}></Route>
           <Route path='attc' element={<Attendence></Attendence>}></Route>
           <Route path='feedbk' element={<Feedback></Feedback>}></Route>
